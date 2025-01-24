@@ -1,10 +1,18 @@
-import './App.css'
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './Home'
+import Navbar from './components/Navbar'
 function App () {
-
-
-  return(
-    <div>Hello</div>
+  type role = 'admin' | 'guest' | 'user'
+  const userRole: role = 'guest'
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Navbar userRole={userRole} />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

@@ -1,5 +1,20 @@
-*{
-  padding:0;
-  margin:0;
+* {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+}
+:root{
+  --main-bg-white:#FFFFFF;
+  --main-bg-blue: #03202F;
+  --secondary-red:#A71930;
+  --font-white: #FFFFFF;
+  --font-black: #000000;
+}
+body,
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
 }
