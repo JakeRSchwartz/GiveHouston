@@ -5,7 +5,7 @@ npm run dev
 ```
 
 
-# To run server (backend) locally
+# Open new terminal- then run server (backend) locally
 ```
 cd server
 npm run dev:watch
