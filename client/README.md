@@ -1,3 +1,19 @@
+# To run client (frontend) on localhost
+```
+cd client
+npm run dev
+```
+
+
+# To run server (backend) locally
+```
+cd server
+npm run dev:watch
+```
+
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
