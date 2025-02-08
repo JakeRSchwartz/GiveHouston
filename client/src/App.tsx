@@ -4,7 +4,7 @@ import Home from './Home'
 import Navbar from './components/Navbar'
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'guest'
+  const userRole: role = 'user'
   return (
     <BrowserRouter>
       <Routes>

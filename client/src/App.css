@@ -9,6 +9,15 @@
   --secondary-red:#A71930;
   --font-white: #FFFFFF;
   --font-black: #000000;
+  --submit-blue: #008CFF;
+  --submit-blue-hover: #0073bf;
+  --cancel-red: #FF0000;
+  --cancel-red-hover: #B30000;
+  --add-green: #07a607;
+  --add-green-hover: #0b7e0b;
+  --edit-yellow: #FFD700;
+  --edit-yellow-hover: #FFB800;
+
 }
 body,
 html {
