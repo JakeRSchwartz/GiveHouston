@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import '../styles/body.styles.css'
 import houstonbanner from '../assets/houston-art.jpg'
-
-const BodyOne = () => {
+interface BodyOneProps {
+  role: string
+}
+const BodyOne = ({ role }: BodyOneProps) => {
   return (
     <div className='body-one'>
       <BodyOneLeft>
@@ -10,22 +12,23 @@ const BodyOne = () => {
       </BodyOneLeft>
       <BodyOneRight>
         <HeaderDiv>
-          <SmallHeader>GIVE BACK TO THE COMMUNITY YOU LOVE - GIVE HOUSTON</SmallHeader>
-          <h4 style={{ padding:'0 5rem 0 5rem'} }>
+          <SmallHeader>
+            GIVE BACK TO THE COMMUNITY YOU LOVE - GIVE HOUSTON
+          </SmallHeader>
+          <h3 style={{ padding: '0 5rem 0 5rem' }}>
             Thanks to the generosity of our community, families in Houston never
             have to worry about the cost of essential services. Whether it’s
             medical care, housing, food, or support, we ensure that those in
             need receive help without financial burden—so they can focus on
             rebuilding their lives and securing a better future.
-          </h4>
+          </h3>
         </HeaderDiv>
-        <RegistrationDiv>
+        {role === 'guest' && (
+          <RegistrationDiv>
             <h2>REGISTER NOW</h2>
-    <RegistrationForm>
-
-        </RegistrationForm>
-        </RegistrationDiv>
-
+            <RegistrationForm></RegistrationForm>
+          </RegistrationDiv>
+        )}
       </BodyOneRight>
     </div>
   )
@@ -34,6 +37,7 @@ const BodyOne = () => {
 export default BodyOne
 
 const HeaderDiv = styled.div`
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47,8 +51,8 @@ const SmallHeader = styled.h2`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:0 5rem 0 5rem;
-  margin-bottom:1rem;
+  padding: 0 5rem 0 5rem;
+  margin-bottom: 1rem;
 `
 
 const BodyOneLeft = styled.div`
@@ -68,15 +72,16 @@ const BodyOneRight = styled.div`
 `
 const RegistrationDiv = styled.div`
   display: flex;
-    flex-direction: column;
-  border:solid orange 2px;
-  width: 100%;
+  flex-direction: column;
+  border: solid orange 2px;
+  width: 90%;
   padding: 2rem;
   & h2 {
-  margin:0 auto 0 auto;}`
-
-  const RegistrationForm = styled.div`
-  width: 100%;
-  background-color:var(--secondary-red);
-  border-radius:.2rem;
-  padding: 2rem;`
+    margin: 0 auto 0 auto;
+  }
+`
+const RegistrationForm = styled.div`
+  background-color: var(--secondary-red);
+  border-radius: 0.2rem;
+  padding: 2rem;
+`
