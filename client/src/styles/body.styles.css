@@ -1,0 +1,8 @@
+.body-one{
+    background:var(--main-bg-red);
+    color: var(--font-white);
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content: space-between;
+}

@@ -3,27 +3,28 @@
   margin: 0;
   box-sizing: border-box;
 }
-:root{
-  --main-bg-white:#FFFFFF;
-  --main-bg-blue: #03202F;
-  --secondary-red:#A71930;
-  --font-white: #FFFFFF;
+:root {
+  --main-bg-white: #ffffff;
+  --main-bg-red:linear-gradient(to bottom, #8B0000, #400000); 
+  --secondary-red: #7b0e0e;
+  --font-white: #ffffff;
   --font-black: #000000;
-  --submit-blue: #008CFF;
+  --submit-blue: #008cff;
   --submit-blue-hover: #0073bf;
-  --cancel-red: #FF0000;
-  --cancel-red-hover: #B30000;
+  --cancel-red: #ff0000;
+  --cancel-red-hover: #b30000;
   --add-green: #07a607;
   --add-green-hover: #0b7e0b;
-  --edit-yellow: #FFD700;
-  --edit-yellow-hover: #FFB800;
-
+  --edit-yellow: #ffd700;
+  --edit-yellow-hover: #ffb800;
 }
 body,
 html {
-  height: 100%;  
+  height: 100%;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Bebas Neue', serif;
+  letter-spacing: 2px;
 }
+
