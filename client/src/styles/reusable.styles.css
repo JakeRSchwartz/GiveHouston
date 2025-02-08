@@ -1,0 +1,58 @@
+.submitBtn {
+  background-color: var(--submit-blue);
+  color: var(--font-white);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: var(--submit-blue-hover);
+  }
+}
+.cancelBtn {
+  background-color: var(--cancel-red);
+  color: var(--font-white);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: var(--cancel-red-hover);
+  }
+}
+.addBtn {
+  background-color: var(--add-green);
+  color: var(--font-white);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: var(--add-green-hover);
+  }
+}
+.editBtn {
+  background-color: var(--edit-yellow);
+  color: var(--font-black);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: var(--edit-yellow-hover);
+  }
+}
+.genericBtn {
+  border: 1.5px solid var(--font-black);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: var(--main-bg-white);
+  gap: 0.5rem;
+}

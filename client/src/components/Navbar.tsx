@@ -1,9 +1,16 @@
 import styled from 'styled-components'
 import { Outlet } from 'react-router-dom'
+import { FaLock } from 'react-icons/fa'
+import { FaUnlock } from 'react-icons/fa6'
+import { FaUser } from 'react-icons/fa'
+import ReusableBtn from './reusable.cont/reusablebtn'
+
 
 type NavbarProps = {
   userRole: 'admin' | 'guest' | 'user'
 }
+
+
 
 const Navbar = ({ userRole }: NavbarProps) => {
   return (
@@ -12,12 +19,21 @@ const Navbar = ({ userRole }: NavbarProps) => {
         <NavLogo>Logo</NavLogo>
         {userRole === 'guest' && (
           <NavLinks>
-            <div>About</div>
-            <div>Login</div>
+            <ReusableBtn type='button' className='submitBtn' styles={{ fontSize: '1.6rem' }}>Learn More</ReusableBtn>
+            <ReusableBtn type='button' className='genericBtn'><FaLock />Login</ReusableBtn>
           </NavLinks>
         )}
         {userRole === 'admin' && <NavLinks>Admin</NavLinks>}
-        {userRole === 'user' && <NavLinks>User</NavLinks>}
+        {userRole === 'user' && (
+          <><NavLinks>
+            <div>Events</div>
+            <div>Volunteer Matching</div>
+            <div>Volunteer History</div>
+          </NavLinks><NavLinks>
+              <ReusableBtn type='button' className='genericBtn'><FaUser/> Profile</ReusableBtn>
+              <ReusableBtn type='button' className='genericBtn'><FaUnlock />Logout</ReusableBtn>
+            </NavLinks></>
+          )}
       </Nav>
       <Container>
         <Outlet />
@@ -34,11 +50,11 @@ const Nav = styled.div`
   position: fixed;
   z-index: 100;
   overflow: hidden;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2rem;
+  padding: 2.5rem 6rem;
   background-color: var(--main-bg-white);
   height: 5.5rem;
   font-weight: 550;
@@ -53,8 +69,8 @@ const NavLogo = styled.div``
 
 const NavLinks = styled.div`
   display: flex;
-  gap: 1.2rem;
-  cursor: pointer;
+  gap: 2.5rem;
+  align-items: center;
 `
 const Container = styled.div`
   padding-top: 5.5rem;
