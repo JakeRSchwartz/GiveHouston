@@ -1,9 +1,12 @@
 import './App.css'
 import BodyOne from './components/BodyOne'
 
-function Home () {
+interface HomeProps {
+  userRole: string;
+}
+function Home ({userRole}: HomeProps) {
   return(
-    <BodyOne />
+    <BodyOne role={userRole}/>
   )
 }
 
