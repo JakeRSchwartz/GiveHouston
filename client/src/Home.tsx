@@ -10,8 +10,8 @@ function Home () {
 export default Home
 
 const Body = styled.div`
-background-color: var(--main-bg-blue);
+background-color: var(--secondary-red);
 width: 100%;
-height: 100vh;`
+height: 100%;`
 
 
