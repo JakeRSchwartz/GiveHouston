@@ -5,12 +5,9 @@ import { FaUnlock } from 'react-icons/fa6'
 import { FaUser } from 'react-icons/fa'
 import ReusableBtn from './reusable.cont/reusablebtn'
 
-
 type NavbarProps = {
   userRole: 'admin' | 'guest' | 'user'
 }
-
-
 
 const Navbar = ({ userRole }: NavbarProps) => {
   return (
@@ -19,21 +16,48 @@ const Navbar = ({ userRole }: NavbarProps) => {
         <NavLogo>Logo</NavLogo>
         {userRole === 'guest' && (
           <NavLinks>
-            <ReusableBtn type='button' className='submitBtn' styles={{ fontSize: '1.6rem' }}>Learn More</ReusableBtn>
-            <ReusableBtn type='button' className='genericBtn'><FaLock />Login</ReusableBtn>
+            <ReusableBtn
+              type='button'
+              className='submitBtn'
+              styles={{ fontSize: '1.6rem' }}
+            >
+              Learn More
+            </ReusableBtn>
+            <ReusableBtn type='button' className='genericBtn'>
+              <FaLock />
+              Login
+            </ReusableBtn>
           </NavLinks>
         )}
-        {userRole === 'admin' && <NavLinks>Admin</NavLinks>}
+        {userRole === 'admin' && (
+          <NavLinks>
+            <ReusableBtn type='button' className='genericBtn'>
+              <FaUser /> Profile
+            </ReusableBtn>
+            <ReusableBtn type='button' className='genericBtn'>
+              <FaUnlock />
+              Logout
+            </ReusableBtn>
+          </NavLinks>
+        )}
         {userRole === 'user' && (
-          <><NavLinks>
-            <div>Events</div>
-            <div>Volunteer Matching</div>
-            <div>Volunteer History</div>
-          </NavLinks><NavLinks>
-              <ReusableBtn type='button' className='genericBtn'><FaUser/> Profile</ReusableBtn>
-              <ReusableBtn type='button' className='genericBtn'><FaUnlock />Logout</ReusableBtn>
-            </NavLinks></>
-          )}
+          <>
+            <NavLinks>
+              <div>Events</div>
+              <div>Volunteer Matching</div>
+              <div>Volunteer History</div>
+            </NavLinks>
+            <NavLinks>
+              <ReusableBtn type='button' className='genericBtn'>
+                <FaUser /> Profile
+              </ReusableBtn>
+              <ReusableBtn type='button' className='genericBtn'>
+                <FaUnlock />
+                Logout
+              </ReusableBtn>
+            </NavLinks>
+          </>
+        )}
       </Nav>
       <Container>
         <Outlet />
@@ -57,8 +81,7 @@ const Nav = styled.div`
   padding: 2.5rem 6rem;
   background-color: var(--main-bg-white);
   height: 5.5rem;
-  font-weight: 550;
-
+  font-family: 'Bebas Neue', serif;
   @media (max-width: 768px) {
     font-size: 1.2rem;
     padding: 1.5rem;
