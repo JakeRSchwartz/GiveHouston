@@ -1,6 +1,10 @@
 .submitBtn {
   background-color: var(--submit-blue);
   color: var(--font-white);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
