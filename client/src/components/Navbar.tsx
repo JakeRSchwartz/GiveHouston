@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { FaLock } from 'react-icons/fa'
 import { FaUnlock } from 'react-icons/fa6'
 import { FaUser } from 'react-icons/fa'
-import ReusableBtn from './reusable.cont/reusablebtn'
+import ReusableBtn from '../components/reusable.cont/ReusableBtn'
 
 type NavbarProps = {
   userRole: 'admin' | 'guest' | 'user'
