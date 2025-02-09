@@ -1,16 +1,17 @@
 .submitBtn {
   background-color: var(--submit-blue);
   color: var(--font-white);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
   cursor: pointer;
   transition: background-color 0.3s;
   font-family: 'Bebas Neue', serif;
+  text-decoration: none;
   &:hover {
     background-color: var(--submit-blue-hover);
   }
@@ -19,6 +20,10 @@
   background-color: var(--cancel-red);
   color: var(--font-white);
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
   font-family: 'Bebas Neue', serif;
@@ -32,6 +37,10 @@
   background-color: var(--add-green);
   color: var(--font-white);
   border: none;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
   cursor: pointer;
@@ -45,6 +54,10 @@
   background-color: var(--edit-yellow);
   color: var(--font-black);
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
   cursor: pointer;
@@ -58,6 +71,7 @@
   border: 1.5px solid var(--font-black);
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
+  gap: 12px;
   display: flex;
   align-items: center;
   font-family: 'Bebas Neue', serif;
@@ -71,7 +85,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.2); 
+  background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;

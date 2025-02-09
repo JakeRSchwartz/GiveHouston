@@ -28,7 +28,7 @@ const BodyOne = ({ role }: BodyOneProps) => {
         {role === 'guest' && (
           <RegistrationDiv>
             <h1>REGISTER NOW</h1>
-            <Link to='/register'>
+            <Link to='/register' style={{ textDecoration: 'none' }}>
               <ReusableBtn
                 type='button'
                 className='submitBtn'
