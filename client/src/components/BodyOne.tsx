@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import '../styles/body.styles.css'
 import houstonbanner from '../assets/houston-art.jpg'
+import ReusableBtn from '../components/reusable.cont/ReusableBtn'
+import {Link} from 'react-router-dom'
 interface BodyOneProps {
   role: string
 }
@@ -25,8 +27,16 @@ const BodyOne = ({ role }: BodyOneProps) => {
         </HeaderDiv>
         {role === 'guest' && (
           <RegistrationDiv>
-            <h2>REGISTER NOW</h2>
-            <RegistrationForm></RegistrationForm>
+            <h1>REGISTER NOW</h1>
+            <Link to='/register'>
+              <ReusableBtn
+                type='button'
+                className='submitBtn'
+                styles={{ fontSize: '4rem' }}
+              >
+                CLICK HERE
+              </ReusableBtn>
+            </Link>
           </RegistrationDiv>
         )}
       </BodyOneRight>
@@ -42,7 +52,6 @@ const HeaderDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   margin: 4rem 0 0 0;
 `
 
@@ -59,6 +68,7 @@ const BodyOneLeft = styled.div`
   width: 40%;
   border: solid red 1px;
   & img {
+    max-height: 850px;
     width: 100%;
     height: 100%;
   }
@@ -72,16 +82,14 @@ const BodyOneRight = styled.div`
 `
 const RegistrationDiv = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
-  border: solid orange 2px;
+  gap: 1.5rem;
+  margin-top: 2rem;
   width: 90%;
   padding: 2rem;
+
   & h2 {
     margin: 0 auto 0 auto;
   }
-`
-const RegistrationForm = styled.div`
-  background-color: var(--secondary-red);
-  border-radius: 0.2rem;
-  padding: 2rem;
 `
