@@ -8,7 +8,7 @@ import { RootState } from '../../store/store'
 import Select, { SingleValue } from 'react-select'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
 import { FaArrowAltCircleLeft } from 'react-icons/fa'
-import { Controller, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import {
   setFormData,
   addAvailability,
@@ -19,7 +19,7 @@ import {
 import { useState } from 'react'
 export default function RegistrationForm () {
   const dispatch = useDispatch()
-  const { control } = useForm()
+  const navigate = useNavigate()
   const [nextPage, setNextPage] = useState<boolean>(false)
   const [confirmPassword, setConfirmPassword] = useState<string>('')
 
@@ -72,9 +72,10 @@ export default function RegistrationForm () {
   }
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = (e?: React.FormEvent<Element>) => {
+    e?.preventDefault()
     console.log('Submitted Data:', formData)
+    navigate('/')
   }
 
   const handleNextPage = () => {
@@ -137,10 +138,12 @@ export default function RegistrationForm () {
         </>
       ) : (
         <>
-          <h1 className='regi-bigheader' style={{marginTop:'2rem'}}>One step closer to generosity</h1>
+          <h1 className='regi-bigheader' style={{ marginTop: '2rem' }}>
+            One step closer to generosity
+          </h1>
           <div className='second-form-div'>
             <h1>Personal Information</h1>
-            <form className='regi-form-second'>
+            <form action="submit" className='regi-form-second'>
               <div className='form-group-second span3'>
                 <label htmlFor='firstName'>First Name</label>
                 <input
@@ -187,7 +190,8 @@ export default function RegistrationForm () {
                 />
               </div>
               <div className='form-group-second span2'>
-                <label htmlFor='state'>State</label>
+                <label style={{marginBottom:'3px'}} htmlFor='state'>State</label>
+                
                 <Select
                   options={stateOptions}
                   onChange={(
@@ -248,7 +252,7 @@ export default function RegistrationForm () {
               <div className='form-group-second span3'>
                 <label htmlFor='availability'>Availability</label>
                 <DatePicker
-                minDate={new Date()}
+                  minDate={new Date()}
                   selected={null}
                   onChange={date => handleDateChange(date)}
                   inline
@@ -282,7 +286,8 @@ export default function RegistrationForm () {
                 BACK
               </ReusableBtn>
               <ReusableBtn
-                type='button'
+                onClick={() => handleSubmit()}
+                type='submit'
                 className='submitBtn'
                 styles={{ fontSize: '2rem' }}
               >
