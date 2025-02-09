@@ -106,6 +106,7 @@
   width: 100%;
   gap:10px;
   margin-top:10px;
+  cursor:pointer;
 }
 .form-group-second-extra{
   display: flex;
@@ -113,6 +114,7 @@
   padding: 2px;
   border:solid var(--font-black) 1px;
   justify-content: start;
+  overflow-y: auto;
   align-items: start;
 }
 .dropdowndisplay{

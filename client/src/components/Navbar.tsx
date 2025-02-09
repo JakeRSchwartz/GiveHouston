@@ -4,12 +4,16 @@ import { FaLock } from 'react-icons/fa'
 import { FaUnlock } from 'react-icons/fa6'
 import { FaUser } from 'react-icons/fa'
 import ReusableBtn from '../components/reusable.cont/ReusableBtn'
+import {useState} from 'react'
+import ReusableModal from './reusable.cont/ReusableModal'
+import LoginForm from './auth.comp/LoginForm'
 
 type NavbarProps = {
   userRole: 'admin' | 'guest' | 'user'
 }
 
 const Navbar = ({ userRole }: NavbarProps) => {
+  const [openModal, setOpenModal] = useState<boolean>(false)
   return (
     <>
       <Nav>
@@ -23,7 +27,7 @@ const Navbar = ({ userRole }: NavbarProps) => {
             >
               Learn More
             </ReusableBtn>
-            <ReusableBtn type='button' className='genericBtn'>
+            <ReusableBtn type='button' className='genericBtn' onClick={() => setOpenModal(true)}>
               <FaLock />
               Login
             </ReusableBtn>
@@ -61,6 +65,9 @@ const Navbar = ({ userRole }: NavbarProps) => {
       </Nav>
       <Container>
         <Outlet />
+        <ReusableModal isOpen={openModal} onClose={() => setOpenModal(false)}>
+          <LoginForm />
+        </ReusableModal>
       </Container>
     </>
   )
@@ -81,6 +88,7 @@ const Nav = styled.div`
   padding: 2.5rem 6rem;
   background-color: var(--main-bg-white);
   height: 5.5rem;
+  box-shadow: 0 16px 16px rgba(0, 0, 0, 0.2);
   font-family: 'Bebas Neue', serif;
   @media (max-width: 768px) {
     font-size: 1.2rem;
