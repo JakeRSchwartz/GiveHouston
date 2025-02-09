@@ -2,7 +2,7 @@ import React from 'react'
 import '../../styles/reusable.styles.css'
 interface ButtonProps {
   children: React.ReactNode
-  onClick?: () => void
+  onClick?: (e?: React.FormEvent | React.FormEventHandler | undefined) => void
   type?: 'button' | 'submit' | 'reset'
   className?: 'genericBtn' | 'submitBtn' | 'cancelBtn' | 'deletebtn' | 'addBtn'
   disabled?: boolean | false
@@ -15,7 +15,7 @@ const ReusableBtn: React.FC<ButtonProps> = ({
   type,
   className,
   disabled,
-  styles={},
+  styles = {}
 }) => {
   return (
     <button
@@ -23,7 +23,7 @@ const ReusableBtn: React.FC<ButtonProps> = ({
       type={type}
       className={className}
       disabled={disabled}
-      style={{...styles}}
+      style={{ ...styles }}
     >
       {children}
     </button>

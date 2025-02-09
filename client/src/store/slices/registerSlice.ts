@@ -4,6 +4,8 @@ type Skill = { value: string; label: string }
 type FormData = {
   firstName: string
   lastName: string
+  email: string
+  password: string
   address1: string
   address2?: string
   city: string
@@ -17,6 +19,8 @@ type FormData = {
 const initialState: FormData = {
   firstName: '',
   lastName: '',
+  email: '',
+  password: '',
   address1: '',
   address2: '',
   city: '',
@@ -49,23 +53,22 @@ const registerSlice = createSlice({
       state,
       action: PayloadAction<{ value: string; label: string }>
     ) => {
-      if (!state.skills) state.skills = [] 
+      if (!state.skills) state.skills = []
 
       const exists = state.skills.some(
         skill => skill.value === action.payload.value
       )
 
       if (exists) {
-        const updatedSkills = state.skills.filter(
-          skill => skill.value !== action.payload.value
-        )
-        state.skills = [...updatedSkills]
+        state.skills = [...state.skills]
       } else {
-        state.skills = [...state.skills, action.payload] 
+        state.skills = [...state.skills, action.payload]
       }
     },
     removeSkills: (state, action: PayloadAction<string>) => {
-        state.skills = state.skills.filter(skill => skill.value !== action.payload)
+      state.skills = state.skills.filter(
+        skill => skill.value !== action.payload
+      )
     },
     clearFormData: () => initialState
   }
@@ -77,7 +80,7 @@ export const {
   removeAvailability,
   toggleSkill,
   clearFormData,
-    removeSkills
+  removeSkills
 } = registerSlice.actions
 export default registerSlice.reducer
 
