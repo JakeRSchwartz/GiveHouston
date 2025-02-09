@@ -66,7 +66,7 @@ const SmallHeader = styled.h2`
 
 const BodyOneLeft = styled.div`
   width: 40%;
-  border: solid red 1px;
+  border: solid black 1px;
   & img {
     max-height: 850px;
     width: 100%;
@@ -76,7 +76,7 @@ const BodyOneLeft = styled.div`
 const BodyOneRight = styled.div`
   display: flex;
   flex-direction: column;
-  border: solid green 1px;
+  border: solid black 1px;
   align-items: center;
   width: 60%;
 `
