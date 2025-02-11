@@ -127,7 +127,7 @@ export default function RegistrationForm () {
               <ReusableBtn
                 type='button'
                 className='genericBtn'
-                styles={{ fontSize: '1.5rem' }}
+                styles={{ fontSize: '1.5rem'}}
                 onClick={handleNextPage}
               >
                 NEXT
