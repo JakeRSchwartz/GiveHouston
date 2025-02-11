@@ -249,3 +249,8 @@ export const skillDropdown = [
   { value: 'mentorship', label: 'Mentorship & Coaching' },
   { value: 'web-development', label: 'Website Development' }
 ]
+export const urgencyDropdown = [
+  {value: "high", label: "High Urgency"},
+  {value: "moderate", label: "Moderate Urgency"},
+  {value: "low", label: "Low Urgency"}
+]
