@@ -7,7 +7,7 @@ function BodyThree() {
         <BodyThreeLeft>
             <UserDiv>
                 <SmallHeader>
-                    More than 100,000 people depend on Give Houston each year
+                    More than 100,000 Houstonians depend on Give Houston each year
                 </SmallHeader>
                 <h3 style={{ padding: '0 5rem 0 5rem' }}>
                     "Being able to reach out to Give Houston with just a computer is nothing, but 
