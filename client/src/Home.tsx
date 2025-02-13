@@ -2,6 +2,8 @@ import './App.css'
 import BodyOne from './components/BodyOne'
 import BodyTwo from './components/BodyTwo'
 import BodyThree from './components/BodyThree'
+import BodyFour from './components/BodyFour'
+
 
 
 interface HomeProps {
@@ -13,6 +15,7 @@ function Home ({ userRole }: HomeProps) {
       <BodyOne role={userRole} />
       <BodyTwo />
       <BodyThree />
+      <BodyFour />
     </>
   )
 }
