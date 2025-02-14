@@ -5,7 +5,7 @@ import RegistrationPage from './pages/RegistrationPage'
 import Navbar from './components/Navbar'
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'user'
+  const userRole: role = 'guest'
   return (
     <BrowserRouter>
       <Routes>
