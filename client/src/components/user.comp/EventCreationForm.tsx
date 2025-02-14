@@ -50,6 +50,17 @@ export default function EventCreationForm() {
 
   const handleSubmit = (e?: React.FormEvent<Element>) => {
     e?.preventDefault();
+    if (
+      !formData.eventName ||
+      !formData.eventDescription ||
+      !formData.location ||
+      !formData.skills.length ||
+      !formData.urgency ||
+      !formData.eventDate
+    ) {
+      alert('Please fill in all required fields');
+      return;
+    }
     console.log("Submitted Data:", formData);
   };
     return ( // Change the styles to not be the same as the registration form later.s
@@ -67,6 +78,8 @@ export default function EventCreationForm() {
                         name='eventName'
                         value={formData.eventName}
                         onChange={handleChanges}
+                        maxLength={100}
+                        required
                         />
                     </div>
                     <div className='form-group-second span6'>
@@ -76,11 +89,12 @@ export default function EventCreationForm() {
                         name='eventDescription'
                         value={formData.eventDescription}
                         onChange={handleChanges}
+                        required
                         />
                     </div>
                     <div className='form-group-second span3'>
                         <label htmlFor='skills'>Skills</label>
-                        <select name='skills' onChange={handleSkillsChange} multiple>
+                        <select name='skills' onChange={handleSkillsChange} multiple required>
                             {skillDropdown.map(skill => (
                             <option key={skill.value} value={skill.value}>
                                 {skill.label}
@@ -111,6 +125,7 @@ export default function EventCreationForm() {
                         name='location'
                         value={formData.location}
                         onChange={handleChanges}
+                        required
                         />
                     </div>
                     <div className='form-group-second span3'>
@@ -124,7 +139,7 @@ export default function EventCreationForm() {
                     </div>
                     <div className='form-group-second span3'>
                         <label htmlFor='urgency'>Urgency</label>
-                        <select name='urgency' onChange={handleChanges}>
+                        <select name='urgency' onChange={handleChanges} required>
                             {urgencyDropdown.map(urgency => (
                             <option key={urgency.value} value={urgency.value}>
                                 {urgency.label}
