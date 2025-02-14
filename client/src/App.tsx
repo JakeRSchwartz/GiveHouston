@@ -4,6 +4,7 @@ import RegistrationPage from './pages/RegistrationPage'
 import Navbar from './components/Navbar'
 import EventCreationPage from './pages/EventCreationPage'
 import ProfilePage from './pages/ProfilePage'
+import EventCreationPage from './pages/EventCreationPage'
 function App () {
   type role = 'admin' | 'guest' | 'user'
   const userRole: role = 'admin'
@@ -15,6 +16,7 @@ function App () {
           <Route path='register' element={<RegistrationPage/>} />
           <Route path="event" element={<EventCreationPage/>}/>
           <Route path='profile' element={<ProfilePage/>} />
+          <Route path="event" element={<EventCreationPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
