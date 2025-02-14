@@ -32,7 +32,7 @@ const BodyOne = ({ role }: BodyOneProps) => {
               <ReusableBtn
                 type='button'
                 className='submitBtn'
-                styles={{ fontSize: '4rem' }}
+                styles={{ fontSize: '4rem'}}
               >
                 CLICK HERE
               </ReusableBtn>
