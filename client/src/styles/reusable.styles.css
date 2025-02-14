@@ -8,14 +8,16 @@
   border: none;
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
-  cursor: pointer;
   transition: background-color 0.3s;
   font-family: 'Bebas Neue', serif;
   text-decoration: none;
+  cursor:pointer !important;
   &:hover {
     background-color: var(--submit-blue-hover);
+    cursor: pointer;
   }
 }
+
 .cancelBtn {
   background-color: var(--cancel-red);
   color: var(--font-white);
@@ -27,10 +29,10 @@
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
   font-family: 'Bebas Neue', serif;
-  cursor: pointer;
   transition: background-color 0.3s;
   &:hover {
     background-color: var(--cancel-red-hover);
+    cursor: pointer;
   }
 }
 .addBtn {
@@ -43,11 +45,12 @@
   align-items: center;
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
-  cursor: pointer;
   font-family: 'Bebas Neue', serif;
   transition: background-color 0.3s;
   &:hover {
     background-color: var(--add-green-hover);
+    cursor: pointer;
+
   }
 }
 .editBtn {
@@ -60,11 +63,12 @@
   gap: 12px;
   padding: 0.5rem 1.5rem;
   border-radius: 0.2rem;
-  cursor: pointer;
   font-family: 'Bebas Neue', serif;
   transition: background-color 0.3s;
   &:hover {
     background-color: var(--edit-yellow-hover);
+    cursor: pointer;
+
   }
 }
 .genericBtn {
@@ -75,9 +79,11 @@
   display: flex;
   align-items: center;
   font-family: 'Bebas Neue', serif;
-  cursor: pointer;
   background-color: var(--main-bg-white);
   gap: 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .modal-overlay {
   position: fixed;
@@ -111,13 +117,13 @@
   background: none;
   border: none;
   font-size: 20px;
-  cursor: pointer;
   transform: color 0.3s ease;
   &:hover {
     color: var(--cancel-red-hover);
+    cursor: pointer;
+
   }
 }
-
 .modal-content {
   text-align: center;
 }
