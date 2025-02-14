@@ -7,11 +7,25 @@ function BodyFour() {
         <BodyFourLeft>
             <UserDiv>
                 <SmallHeader>
-                    ????
+                    Our Future: Building a Better Tomorrow
                 </SmallHeader>
                 <h3 style={{ padding: '0 5rem 0 5rem' }}>
-                    ?????
+                    At Give Houston, we are driven by a powerful vision: 
+                    a future where every person has access to medical care, 
+                    housing, food, and other support. Our journey is far from over, 
+                    and with your support, we are laying the foundation for a 
+                    brighter Tomorrow.
                 </h3>
+                <SmallHeader2>
+                    How can I make a big difference as of today?
+                </SmallHeader2>
+                <h3 style={{ padding: '0 5rem 0 5rem' }}>
+                    Our future depends on people like you, those who are determined to 
+                    creating a lasting change, Together, we can make these goals a reality. 
+                    Whether it's through donations, volunteering, or sharing our message, 
+                    your support plays a crucial role in shaping a better tomorrow.
+                </h3>
+                
             </UserDiv>
         </BodyFourLeft>
         <BodyFourRight>
@@ -31,6 +45,14 @@ const SmallHeader = styled.h2`
   padding: 0 5rem 0 5rem;
   margin-bottom: 1rem;
 `
+const SmallHeader2 = styled.h2`
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 5rem 0 5rem;
+  margin-bottom: 1rem;
+`
 
 const BodyFourRight = styled.div`
   width: 40%;
@@ -45,7 +67,7 @@ const BodyFourRight = styled.div`
 const BodyFourLeft = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: rgb(200,200,200);
+  background-color: rgb(95, 113, 89);
   align-items: center;
   width: 60%;
 `
