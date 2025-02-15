@@ -4,10 +4,11 @@ import RegistrationPage from './pages/RegistrationPage'
 import Navbar from './components/Navbar'
 import ProfilePage from './pages/ProfilePage'
 import EventCreationPage from './pages/EventCreationPage'
+import VolunteerMatchingPage from './pages/VolunteerMatchingPage'
 
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'guest'
+  const userRole: role = 'user'
   return (
     <BrowserRouter>
       <Routes>
@@ -16,6 +17,7 @@ function App () {
           <Route path='register' element={<RegistrationPage/>} />
           <Route path='profile' element={<ProfilePage/>} />
           <Route path="event" element={<EventCreationPage/>}/>
+          <Route path="match" element={<VolunteerMatchingPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
