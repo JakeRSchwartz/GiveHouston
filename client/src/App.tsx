@@ -8,7 +8,7 @@ import EventCreationPage from './pages/EventCreationPage'
 import ProfilePage from './pages/ProfilePage'
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'admin'
+  const userRole: role = 'user'
   return (
     <BrowserRouter>
       <Routes>
