@@ -3,9 +3,10 @@ import Home from './Home'
 import RegistrationPage from './pages/RegistrationPage'
 import Navbar from './components/Navbar'
 import EventCreationPage from './pages/EventCreationPage'
+import ProfilePage from './pages/ProfilePage'
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'guest'
+  const userRole: role = 'admin'
   return (
     <BrowserRouter>
       <Routes>
@@ -13,6 +14,7 @@ function App () {
           <Route index element={<Home userRole={userRole}/>} />
           <Route path='register' element={<RegistrationPage/>} />
           <Route path="event" element={<EventCreationPage/>}/>
+          <Route path='profile' element={<ProfilePage/>} />
         </Route>
       </Routes>
     </BrowserRouter>
