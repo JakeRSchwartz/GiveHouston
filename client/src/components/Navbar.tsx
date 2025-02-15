@@ -14,6 +14,12 @@ type NavbarProps = {
 
 const Navbar = ({ userRole }: NavbarProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const [isTooltipVisible, setTooltipVisible] = useState<boolean>(false);
+
+  const handleNotificationClick = () => {
+    setTooltipVisible(!isTooltipVisible); 
+  }
+  
   return (
     <>
       <Nav>
@@ -51,7 +57,13 @@ const Navbar = ({ userRole }: NavbarProps) => {
               <div>Volunteer Matching</div>
               <div>Volunteer History</div>
             </NavLinks>
-            <NavLinks>
+            <NavLinks>                
+              <ReusableBtn type="button" className="genericBtn" onClick={handleNotificationClick}>
+                <NotificationContainer>
+                  <span>Notification</span> 
+                  <NotificationBadge>3</NotificationBadge> 
+                </NotificationContainer>
+              </ReusableBtn>
               <ReusableBtn type='button' className='genericBtn'>
                 <FaUser /> Profile
               </ReusableBtn>
@@ -63,6 +75,19 @@ const Navbar = ({ userRole }: NavbarProps) => {
           </>
         )}
       </Nav>
+      <Tooltipdiv>
+        {isTooltipVisible && (<>
+          <Tooltip>
+            Notification 1
+          </Tooltip>
+          <Tooltip>
+            Notification 2
+          </Tooltip>
+          <Tooltip>
+            Notification 3
+          </Tooltip>
+        </>)}
+      </Tooltipdiv>
       <Container>
         <Outlet />
         <ReusableModal isOpen={openModal} onClose={() => setOpenModal(false)}>
@@ -108,4 +133,45 @@ const Container = styled.div`
   @media (max-width: 768px) {
     padding-top: 4rem;
   }
+`
+
+const NotificationContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+const NotificationBadge = styled.div`
+  position: absolute;
+  top: -15px;
+  right: -35px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const Tooltip = styled.div`
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  white-space: nowrap;
+`
+
+const Tooltipdiv = styled.div`
+  display: flex;
+  position: fixed;
+  top: 65px;
+  left: 975px;
+  flex-direction: column;
+  z-index: 200;
 `
