@@ -5,7 +5,7 @@ import Navbar from './components/Navbar'
 import EventCreationPage from './pages/EventCreationPage'
 import ProfilePage from './pages/ProfilePage'
 import EventCreationPage from './pages/EventCreationPage'
-import ProfilePage from './pages/ProfilePage'
+
 function App () {
   type role = 'admin' | 'guest' | 'user'
   const userRole: role = 'guest'
@@ -18,7 +18,6 @@ function App () {
           <Route path="event" element={<EventCreationPage/>}/>
           <Route path='profile' element={<ProfilePage/>} />
           <Route path="event" element={<EventCreationPage/>}/>
-          <Route path='profile' element={<ProfilePage/>} />
         </Route>
       </Routes>
     </BrowserRouter>
