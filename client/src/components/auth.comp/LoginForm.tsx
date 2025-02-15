@@ -29,7 +29,7 @@ const LoginContainer = styled.div`
   padding: 20px;
   display: flex;
 flex-direction: column;
-align-items: center:
+align-items: center;
 overflow: hidden;
   label {
     font-size: 1.2rem;

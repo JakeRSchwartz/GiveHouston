@@ -1,0 +1,29 @@
+thead,
+tbody {
+    background-color: #e4f0f5;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    width: 100%;
+    padding: 10px 12px;
+    align-self: center;
+}
+
+th, td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+}
+
+td {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    padding: 10px 12px;
+    border: 10px solid rgb(0 0 0);
+}
