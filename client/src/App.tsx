@@ -7,7 +7,7 @@ import ProfilePage from './pages/ProfilePage'
 import VolunteerHistory from './components/user.comp/VolunteerHistoryTable'
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'admin'
+  const userRole: role = 'guest'
   return (
     <BrowserRouter>
       <Routes>
