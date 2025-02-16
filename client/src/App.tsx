@@ -4,6 +4,7 @@ import Home from './Home'
 import RegistrationPage from './pages/RegistrationPage'
 import Navbar from './components/Navbar'
 import ProfilePage from './pages/ProfilePage'
+import VolunteerHistory from './components/user.comp/VolunteerHistoryTable'
 function App () {
   type role = 'admin' | 'guest' | 'user'
   const userRole: role = 'admin'
@@ -14,6 +15,9 @@ function App () {
           <Route index element={<Home userRole={userRole}/>} />
           <Route path='register' element={<RegistrationPage/>} />
           <Route path='profile' element={<ProfilePage/>} />
+
+          {/* Admin Routes - will make protected when backend auth is set */}
+          <Route path='VolunteerHistory' element={<VolunteerHistory/>} />
         </Route>
       </Routes>
     </BrowserRouter>

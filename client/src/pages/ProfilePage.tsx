@@ -57,7 +57,7 @@ const ProfilePage = () => {
                 defaultValue={user.firstName}
               />
             ) : (
-              <p>{user.firstName}</p>
+              <div className='profile-info-div'>Houston</div>
             )}
           </div>
 
@@ -68,7 +68,7 @@ const ProfilePage = () => {
             {editMode ? (
               <input type='text' name='lastName' defaultValue={user.lastName} />
             ) : (
-              <p>{user.lastName}</p>
+              <div className='profile-info-div'>Houston</div>
             )}
           </div>
 
@@ -78,7 +78,7 @@ const ProfilePage = () => {
             {editMode ? (
               <input type='text' name='address1' defaultValue={user.address1} />
             ) : (
-              <p>{user.address1}</p>
+              <div className='profile-info-div'>Houston</div>
             )}
           </div>
 
@@ -88,7 +88,7 @@ const ProfilePage = () => {
             {editMode ? (
               <input type='text' name='address2' defaultValue={user.address2} />
             ) : (
-              <p>{user.address2 || 'N/A'}</p>
+              <div className='profile-info-div'>{user.address2 || 'N/A'}</div>
             )}
           </div>
 
@@ -98,7 +98,7 @@ const ProfilePage = () => {
             {editMode ? (
               <input type='text' name='city' defaultValue={user.city} />
             ) : (
-              <p>{user.city}</p>
+              <div className='profile-info-div'>Houston</div>
             )}
           </div>
 
@@ -108,7 +108,7 @@ const ProfilePage = () => {
             {editMode ? (
               <Select options={stateDropdown} defaultValue={user.state} />
             ) : (
-              <p>{user.state.label}</p>
+              <div className='profile-info-div'>Houston</div>
             )}
           </div>
 
@@ -118,7 +118,7 @@ const ProfilePage = () => {
             {editMode ? (
               <input type='text' name='zip' defaultValue={user.zip} />
             ) : (
-              <p>{user.zip}</p>
+              <div className='profile-info-div'>Houston</div>
             )}
           </div>
 
@@ -135,11 +135,11 @@ const ProfilePage = () => {
                 ))}
               </select>
             ) : (
-              <p>
+              <div className='profile-info-extra'>
                 {user.skills.length
                   ? user.skills.map(skill => skill.label).join(', ')
                   : 'None'}
-              </p>
+              </div>
             )}
           </div>
           {editMode && (
@@ -154,16 +154,16 @@ const ProfilePage = () => {
             {editMode ? (
               <DatePicker minDate={new Date()} inline />
             ) : (
-              <p>
+              <div className='profile-info-extra'>
                 {user.availability.length
                   ? user.availability.join(', ')
                   : 'No availability set'}
-              </p>
+              </div>
             )}
           </div>
           {editMode && (
             <div className='form-group-second-extra span3'>
-              <div className='dropdowndisplay'></div>
+              <div className='dropdowndisplay'>hi</div>
             </div>
           )}
 
@@ -172,7 +172,7 @@ const ProfilePage = () => {
             <div className='button-div-second'>
               <ReusableBtn
                 type='button'
-                className='genericBtn'
+                className='submitBtn'
                 styles={{ fontSize: '1.5rem' }}
                 onClick={toggleEditMode}
               >

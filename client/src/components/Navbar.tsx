@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { FaLock } from 'react-icons/fa'
 import { FaUnlock } from 'react-icons/fa6'
 import { FaUser } from 'react-icons/fa'
 import ReusableBtn from '../components/reusable.cont/ReusableBtn'
-import {useState} from 'react'
+import { useState } from 'react'
 import ReusableModal from './reusable.cont/ReusableModal'
 import LoginForm from './auth.comp/LoginForm'
 
@@ -14,16 +14,25 @@ type NavbarProps = {
 
 const Navbar = ({ userRole }: NavbarProps) => {
   const [openModal, setOpenModal] = useState<boolean>(false)
-  const [isTooltipVisible, setTooltipVisible] = useState<boolean>(false);
+  const [isTooltipVisible, setTooltipVisible] = useState<boolean>(false)
 
   const handleNotificationClick = () => {
-    setTooltipVisible(!isTooltipVisible); 
+    setTooltipVisible(!isTooltipVisible)
   }
-  
+
   return (
     <>
       <Nav>
-        <NavLogo>Logo</NavLogo>
+        <NavLink
+          to='/'
+          style={{
+            textDecoration: 'none',
+            color: '#000000',
+            cursor: 'pointer'
+          }}
+        >
+          <NavLogo>Logo</NavLogo>
+        </NavLink>
         {userRole === 'guest' && (
           <NavLinks>
             <ReusableBtn
@@ -33,40 +42,96 @@ const Navbar = ({ userRole }: NavbarProps) => {
             >
               Learn More
             </ReusableBtn>
-            <ReusableBtn type='button' className='genericBtn' onClick={() => setOpenModal(true)}>
+            <ReusableBtn
+              type='button'
+              className='genericBtn'
+              onClick={() => setOpenModal(true)}
+            >
               <FaLock />
               Login
             </ReusableBtn>
           </NavLinks>
         )}
         {userRole === 'admin' && (
-          <NavLinks>
-            <ReusableBtn type='button' className='genericBtn'>
-              <FaUser /> Profile
-            </ReusableBtn>
-            <ReusableBtn type='button' className='genericBtn'>
-              <FaUnlock />
-              Logout
-            </ReusableBtn>
-          </NavLinks>
+          <>
+            <NavLinks>
+              <MiddleLink>Events</MiddleLink>
+              <MiddleLink>Event Matching</MiddleLink>
+              <NavLink
+                to='VolunteerHistory'
+                style={{ textDecoration: 'none', color: '#000000' }}
+              >
+                <MiddleLink>Volunteer History</MiddleLink>
+              </NavLink>
+            </NavLinks>
+
+            <NavLinks>
+              <ColumnContainer>
+                <ReusableBtn
+                  type='button'
+                  className='genericBtn'
+                  onClick={handleNotificationClick}
+                >
+                  <NotificationContainer>
+                    <span>Notification</span>
+                    <NotificationBadge>3</NotificationBadge>
+                  </NotificationContainer>
+                </ReusableBtn>
+                <Tooltipdiv>
+                  {isTooltipVisible && (
+                    <>
+                      <Tooltip>Notification 1</Tooltip>
+                      <Tooltip>Notification 2</Tooltip>
+                      <Tooltip>Notification 3</Tooltip>
+                    </>
+                  )}
+                </Tooltipdiv>
+              </ColumnContainer>
+              <NavLink to='/profile' style={{ textDecoration: 'none' }}>
+                <ReusableBtn type='button' className='genericBtn'>
+                  <FaUser /> Profile
+                </ReusableBtn>
+              </NavLink>
+              <ReusableBtn type='button' className='genericBtn'>
+                <FaUnlock />
+                Logout
+              </ReusableBtn>
+            </NavLinks>
+          </>
         )}
         {userRole === 'user' && (
           <>
             <NavLinks>
-              <div>Events</div>
-              <div>Volunteer Matching</div>
-              <div>Volunteer History</div>
+              <MiddleLink>Events</MiddleLink>
+              <MiddleLink>Your History</MiddleLink>
             </NavLinks>
-            <NavLinks>                
-              <ReusableBtn type="button" className="genericBtn" onClick={handleNotificationClick}>
-                <NotificationContainer>
-                  <span>Notification</span> 
-                  <NotificationBadge>3</NotificationBadge> 
-                </NotificationContainer>
-              </ReusableBtn>
-              <ReusableBtn type='button' className='genericBtn'>
-                <FaUser /> Profile
-              </ReusableBtn>
+            <NavLinks>
+              <ColumnContainer>
+                <ReusableBtn
+                  type='button'
+                  className='genericBtn'
+                  onClick={handleNotificationClick}
+                >
+                  <NotificationContainer>
+                    <span>Notification</span>
+                    <NotificationBadge>3</NotificationBadge>
+                  </NotificationContainer>
+                </ReusableBtn>
+                <Tooltipdiv>
+                  {isTooltipVisible && (
+                    <>
+                      <Tooltip>Notification 1</Tooltip>
+                      <Tooltip>Notification 2</Tooltip>
+                      <Tooltip>Notification 3</Tooltip>
+                    </>
+                  )}
+                </Tooltipdiv>
+              </ColumnContainer>
+              <NavLink to='/profile' style={{ textDecoration: 'none' }}>
+                <ReusableBtn type='button' className='genericBtn'>
+                  <FaUser /> Profile
+                </ReusableBtn>
+              </NavLink>
               <ReusableBtn type='button' className='genericBtn'>
                 <FaUnlock />
                 Logout
@@ -75,19 +140,6 @@ const Navbar = ({ userRole }: NavbarProps) => {
           </>
         )}
       </Nav>
-      <Tooltipdiv>
-        {isTooltipVisible && (<>
-          <Tooltip>
-            Notification 1
-          </Tooltip>
-          <Tooltip>
-            Notification 2
-          </Tooltip>
-          <Tooltip>
-            Notification 3
-          </Tooltip>
-        </>)}
-      </Tooltipdiv>
       <Container>
         <Outlet />
         <ReusableModal isOpen={openModal} onClose={() => setOpenModal(false)}>
@@ -134,7 +186,12 @@ const Container = styled.div`
     padding-top: 4rem;
   }
 `
-
+const ColumnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  align-items: center;
+`
 const NotificationContainer = styled.div`
   position: relative;
   display: flex;
@@ -170,8 +227,16 @@ const Tooltip = styled.div`
 const Tooltipdiv = styled.div`
   display: flex;
   position: fixed;
-  top: 65px;
-  left: 975px;
   flex-direction: column;
+  margin-top: 2.5rem;
   z-index: 200;
+  gap: 0.2rem;
+`
+const MiddleLink = styled.div`
+  color: #000000;
+`
+const NavLink = styled(Link)`
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
 `
