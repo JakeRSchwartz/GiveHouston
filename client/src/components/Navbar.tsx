@@ -143,7 +143,7 @@ const Navbar = ({ userRole }: NavbarProps) => {
       <Container>
         <Outlet />
         <ReusableModal isOpen={openModal} onClose={() => setOpenModal(false)}>
-          <LoginForm />
+          <LoginForm isOpen={openModal} onClose={() => setOpenModal(false) }/>
         </ReusableModal>
       </Container>
     </>
