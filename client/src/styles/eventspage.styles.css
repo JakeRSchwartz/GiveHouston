@@ -1,0 +1,107 @@
+.main-events-div{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+}
+.main-events-div h1{
+    color: var(--font-white);
+    font-size: 5rem;
+    margin:2rem 0 2rem 0;
+}
+.event-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    width: 80%;
+    margin-bottom: 5rem;
+}
+.event{
+    display:flex;
+    background: var(--main-bg-white);
+    border-radius: .3rem;
+    border:solid black 1px;
+}
+.event img{
+    width:30%;
+    object-fit: cover;
+    border-radius: .3rem 0 0 .3rem;
+}
+.event-info{
+    display:flex;
+    flex-direction:column;
+    padding:1rem;
+    align-items:center;
+    width:70%;
+    background-color: #f5f5f5;
+}
+.event-info p{
+    font-size:1rem;
+    color: var(--font-black);
+    margin: .5rem 0;
+    line-height: 1.5;
+    padding:1rem;
+}
+.event-info ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap:1rem;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: .9rem;
+    color:var(--secondary-red);
+    padding:1rem;
+}
+.event-info h4{
+    font-size:1.2rem;
+    color: var(--font-black);
+    margin: .2rem 0;
+}
+.add-btn{
+    display:flex;
+    justify-content: end;
+    width:100%;
+    height:100%;
+    align-items: end;
+    padding:1rem;
+}
+
+@media screen and (max-width: 768px){
+    .event-container{
+        grid-template-columns: 1fr;
+    }
+    .main-events-div h2{
+        font-size: 1.8rem;
+    }
+    .main-events-div h1{
+        font-size: 3rem;
+    }
+    .event img{
+        width:30%;
+        border-radius: .3rem .3rem 0 0;
+    }
+    .event-info{
+        width:100%;
+        border-radius: 0 .3rem .3rem .3rem;
+    }
+    .event-info ul{
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap:1rem;
+        flex-wrap: wrap;
+        width: 100%;
+        font-size: .8rem;
+        color:var(--secondary-red);
+        padding:1rem;
+    }
+    .event-info p{
+        font-size:.8rem;
+    }
+    .event-info h4{
+        font-size:.9rem;
+    }
+}
