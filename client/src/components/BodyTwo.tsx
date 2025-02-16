@@ -61,7 +61,7 @@ const UserDiv = styled.div`
   margin-top: 2rem;
   width: 90%;
   padding: 2rem;
-  background-color: #bdc5c6;
+  background-color:#f5f5f5;
   border-radius: .3rem;
 
   & h2 {

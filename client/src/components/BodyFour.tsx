@@ -4,7 +4,7 @@ import aboutImage2 from '../assets/charity2.jpg'
 function BodyFour() {
   return (
     <div className='body-four'>
-        <BodyFourLeft>
+          <div className="body-four-left">
             <UserDiv>
                 <SmallHeader>
                     Our Future: Building a Better Tomorrow
@@ -27,7 +27,7 @@ function BodyFour() {
                 </h3>
                 
             </UserDiv>
-        </BodyFourLeft>
+            </div>
         <BodyFourRight>
             <img src={aboutImage2} alt='Houston skyline' />
         </BodyFourRight>
@@ -64,13 +64,6 @@ const BodyFourRight = styled.div`
     object-fit: cover;
   }
 `
-const BodyFourLeft = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(95, 113, 89);
-  align-items: center;
-  width: 60%;
-`
 const UserDiv = styled.div`
   display: flex;
   align-items: center;
@@ -80,7 +73,7 @@ const UserDiv = styled.div`
   width: 90%;
   padding: 2rem;
   border-radius: .3rem;
-
+  background-color: #f5f5f5;
   & h2 {
     margin: 0 auto 0 auto;
   }
