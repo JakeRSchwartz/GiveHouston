@@ -55,7 +55,9 @@ const Navbar = ({ userRole }: NavbarProps) => {
         {userRole === 'admin' && (
           <>
             <NavLinks>
-              <MiddleLink>Events</MiddleLink>
+              <NavLink to='events'>
+                <MiddleLink>Events</MiddleLink>
+              </NavLink>
               <MiddleLink>Event Matching</MiddleLink>
               <NavLink
                 to='VolunteerHistory'
@@ -102,7 +104,9 @@ const Navbar = ({ userRole }: NavbarProps) => {
         {userRole === 'user' && (
           <>
             <NavLinks>
-              <MiddleLink>Events</MiddleLink>
+              <NavLink to='events'>
+                <MiddleLink>Events</MiddleLink>
+              </NavLink>
               <MiddleLink>Your History</MiddleLink>
             </NavLinks>
             <NavLinks>
@@ -143,7 +147,7 @@ const Navbar = ({ userRole }: NavbarProps) => {
       <Container>
         <Outlet />
         <ReusableModal isOpen={openModal} onClose={() => setOpenModal(false)}>
-          <LoginForm />
+          <LoginForm isOpen={openModal} onClose={() => setOpenModal(false)} />
         </ReusableModal>
       </Container>
     </>
