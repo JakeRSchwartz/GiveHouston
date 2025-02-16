@@ -9,7 +9,7 @@ import EventsPage from './pages/EventsPage'
 import EventManagment from './pages/admin/EventManagment'
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'admin'
+  const userRole: role = 'guest'
   return (
     <BrowserRouter>
       <Routes>
