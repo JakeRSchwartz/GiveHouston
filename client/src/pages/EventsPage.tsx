@@ -94,7 +94,7 @@ useEffect(() => {
     return dateTimeA - dateTimeB
   })
   setSortedEvents(sorted)
-}, [events])
+}, [])
 
 
 
