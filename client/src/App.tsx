@@ -6,9 +6,10 @@ import Navbar from './components/Navbar'
 import ProfilePage from './pages/ProfilePage'
 import VolunteerHistory from './components/user.comp/VolunteerHistoryTable'
 import EventsPage from './pages/EventsPage'
+import EventManagment from './pages/admin/EventManagment'
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'user'
+  const userRole: role = 'admin'
   return (
     <BrowserRouter>
       <Routes>
@@ -20,6 +21,7 @@ function App () {
 
           {/* Admin Routes - will make protected when backend auth is set */}
           <Route path='VolunteerHistory' element={<VolunteerHistory/>} />
+          <Route path='eventManagement' element={<EventManagment/>} />
         </Route>
       </Routes>
     </BrowserRouter>
