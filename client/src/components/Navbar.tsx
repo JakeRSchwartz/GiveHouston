@@ -55,8 +55,8 @@ const Navbar = ({ userRole }: NavbarProps) => {
         {userRole === 'admin' && (
           <>
             <NavLinks>
-              <NavLink to='events'>
-                <MiddleLink>Events</MiddleLink>
+              <NavLink to='eventManagement'>
+                <MiddleLink>Event Management</MiddleLink>
               </NavLink>
               <MiddleLink>Event Matching</MiddleLink>
               <NavLink

@@ -20,6 +20,7 @@
 }
 body,
 html {
+  min-height:100vh;
   background: var(--main-bg-red);
   padding: 0;
   margin: 0;
