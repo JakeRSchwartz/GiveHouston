@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type Skill = { value: string; label: string }
 type FormData = {
@@ -13,7 +13,10 @@ type FormData = {
   zip: string
   skills: Skill[]
   preferences?: string
-  availability: string[]
+  availability: string[],
+  status: 'idle' | 'loading' | 'succeeded' | 'failed'
+  error: string | null
+
 }
 
 const initialState: FormData = {
@@ -28,8 +31,36 @@ const initialState: FormData = {
   zip: '',
   skills: [],
   preferences: '',
-  availability: []
+  availability: [],
+  status: 'idle',
+  error: null
 }
+
+//Async Thunks
+export const registerUser = createAsyncThunk(
+  'registerUser',
+  async (formData: FormData, { rejectWithValue }) => {
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      if (response.ok) {
+        return await response.json()
+      }
+      return rejectWithValue('Failed to register')
+    } catch (err) {
+      if (err instanceof Error) {
+        return rejectWithValue(err.toString())
+      }
+      return rejectWithValue('An unknown error occurred')
+    }
+  }
+)
+
 
 const registerSlice = createSlice({
   name: 'register',
@@ -71,6 +102,18 @@ const registerSlice = createSlice({
       )
     },
     clearFormData: () => initialState
+  },
+  extraReducers: builder => {
+    builder.addCase(registerUser.pending, state => {
+      state.status = 'loading'
+    })
+    builder.addCase(registerUser.fulfilled, state => {
+      state.status = 'succeeded'
+    })
+    builder.addCase(registerUser.rejected, (state, action) => {
+      state.status = 'failed'
+      state.error = action.payload as string
+    })
   }
 })
 
