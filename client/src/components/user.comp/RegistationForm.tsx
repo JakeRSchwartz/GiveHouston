@@ -4,6 +4,7 @@ import { stateDropdown, skillDropdown } from '../../types/dropdownjson'
 import '../../styles/registration.styles.css'
 import ReusableBtn from '../reusable.cont/ReusableBtn'
 import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch } from '../../store/store'
 import { RootState } from '../../store/store'
 import Select, { SingleValue } from 'react-select'
 import { FaArrowAltCircleRight } from 'react-icons/fa'
@@ -14,11 +15,12 @@ import {
   addAvailability,
   toggleSkill,
   removeSkills,
-  removeAvailability
+  removeAvailability,
+  registerUser
 } from '../../store/slices/registerSlice'
 import { useState } from 'react'
 export default function RegistrationForm () {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
   const [nextPage, setNextPage] = useState<boolean>(false)
   const [confirmPassword, setConfirmPassword] = useState<string>('')
@@ -74,7 +76,7 @@ export default function RegistrationForm () {
   // Handle form submission
   const handleSubmit = (e?: React.FormEvent<Element>) => {
     e?.preventDefault()
-    console.log('Submitted Data:', formData)
+    dispatch(registerUser(formData))
     navigate('/')
   }
 
@@ -127,7 +129,7 @@ export default function RegistrationForm () {
               <ReusableBtn
                 type='button'
                 className='genericBtn'
-                styles={{ fontSize: '1.5rem'}}
+                styles={{ fontSize: '1.5rem' }}
                 onClick={handleNextPage}
               >
                 NEXT
@@ -143,7 +145,7 @@ export default function RegistrationForm () {
           </h1>
           <div className='second-form-div'>
             <h1>Personal Information</h1>
-            <form action="submit" className='regi-form-second'>
+            <form action='submit' className='regi-form-second'>
               <div className='form-group-second span3'>
                 <label htmlFor='firstName'>First Name</label>
                 <input
@@ -190,8 +192,10 @@ export default function RegistrationForm () {
                 />
               </div>
               <div className='form-group-second span2'>
-                <label style={{marginBottom:'3px'}} htmlFor='state'>State</label>
-                
+                <label style={{ marginBottom: '3px' }} htmlFor='state'>
+                  State
+                </label>
+
                 <Select
                   options={stateOptions}
                   onChange={(

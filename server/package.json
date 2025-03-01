@@ -8,17 +8,38 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "dev:transpile": "ts-node-dev --respawn --transpile-only src/index.ts", 
+    "dev:transpile": "ts-node-dev --respawn --transpile-only src/index.ts",
     "dev:watch": "nodemon --exec ts-node src/index.ts"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.2"
+    "@mikro-orm/cli": "^6.4.7",
+    "@mikro-orm/core": "^6.4.7",
+    "@mikro-orm/migrations": "^6.4.7",
+    "@mikro-orm/postgresql": "^6.4.7",
+    "@mikro-orm/reflection": "^6.4.7",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1",
+    "reflect-metadata": "^0.2.2",
+    "uuid": "^11.1.0"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/mikro-orm.config.ts"
+    ]
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
-    "@types/node": "^22.10.7",
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.8",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.21.0",
     "@typescript-eslint/parser": "^8.21.0",
     "eslint": "^9.18.0",
