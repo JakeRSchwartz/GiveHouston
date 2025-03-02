@@ -7,20 +7,24 @@ import {
   Unique
 } from '@mikro-orm/core';
 import { Skill } from './skill.entity';
-import { v4 as uuidv4 } from 'uuid';
 import { Availability } from './availability.entity';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 export class User {
   @PrimaryKey({
-    type: 'uuid'
+    columnType: 'uuid'
   })
   id: string = uuidv4();
 
-  @Property()
+  @Property({
+    length: 25
+  })
   firstName!: string;
 
-  @Property()
+  @Property({
+    length: 25
+  })
   lastName!: string;
 
   @Property({
@@ -31,29 +35,44 @@ export class User {
   @Property()
   password!: string;
 
-  @Property()
+  @Property({
+    length: 100
+  })
   address1!: string;
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, length: 100 })
   address2?: string;
 
-  @Property()
+  @Property({
+    length: 50
+  })
   city!: string;
 
-  @Property()
+  @Property({
+    length: 2
+  })
   state!: string;
 
-  @Property()
+  @Property({
+    length: 9
+  })
   zip!: string;
+
+  @Property({
+    length: 5
+  })
+  role!: string;
 
   @Property({ nullable: true })
   preferences?: string;
 
-  @ManyToMany(() => Skill, skill => skill.users)
+  @ManyToMany(() => Skill, skill => skill.users, { owner: true })
   skills = new Collection<Skill>(this);
 
-  @ManyToMany(() => Availability, availability => availability.user, { owner: true })
-  availability = new Collection<Availability>(this);
+  @ManyToMany(() => Availability, availability => availability.user, {
+    owner: true
+  })
+  availability: Collection<Availability> = new Collection<Availability>(this);
 
   @Property({ onCreate: () => new Date() })
   createdAt: Date = new Date();
