@@ -1,21 +1,31 @@
-import { Entity, PrimaryKey, Property, Unique } from '@mikro-orm/core';
+import {
+  Collection,
+  Entity,
+  ManyToMany,
+  PrimaryKey,
+  Property,
+  Unique
+} from '@mikro-orm/core';
+import { Skill } from './skill.entity';
 import { v4 as uuidv4 } from 'uuid';
+import { Availability } from './availability.entity';
 
 @Entity()
-@Unique({ properties: ['email'] }) // Ensure email is unique
 export class User {
-  @PrimaryKey()
+  @PrimaryKey({
+    type: 'uuid'
+  })
   id: string = uuidv4();
 
   @Property()
   firstName!: string;
 
-  @Property(
-    
-  )
+  @Property()
   lastName!: string;
 
-  @Property()
+  @Property({
+    unique: true
+  })
   email!: string;
 
   @Property()
@@ -36,14 +46,14 @@ export class User {
   @Property()
   zip!: string;
 
-  @Property({ type: 'jsonb' }) // Store as JSON in PostgreSQL
-  skills!: string[];
-
   @Property({ nullable: true })
   preferences?: string;
 
-  @Property({ type: 'jsonb' })
-  availability!: string[];
+  @ManyToMany(() => Skill, skill => skill.users)
+  skills = new Collection<Skill>(this);
+
+  @ManyToMany(() => Availability, availability => availability.user, { owner: true })
+  availability = new Collection<Availability>(this);
 
   @Property({ onCreate: () => new Date() })
   createdAt: Date = new Date();

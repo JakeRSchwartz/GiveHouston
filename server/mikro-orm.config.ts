@@ -7,7 +7,7 @@ import path from 'path';
 
 export default {
   entities: [User],
-  dbName: 'GiveHouston',
+  dbName: 'GiveHouston', // rename to match your database name 
   driver: PostgreSqlDriver,
   metadataProvider: TsMorphMetadataProvider,
   debug: !__prod__,
