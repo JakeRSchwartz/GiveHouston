@@ -1,49 +1,78 @@
-import { Entity, PrimaryKey, Property, Unique } from '@mikro-orm/core';
+import {
+  Collection,
+  Entity,
+  ManyToMany,
+  PrimaryKey,
+  Property,
+  Unique
+} from '@mikro-orm/core';
+import { Skill } from './skill.entity';
+import { Availability } from './availability.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
-@Unique({ properties: ['email'] }) // Ensure email is unique
 export class User {
-  @PrimaryKey()
+  @PrimaryKey({
+    columnType: 'uuid'
+  })
   id: string = uuidv4();
 
-  @Property()
+  @Property({
+    length: 25
+  })
   firstName!: string;
 
-  @Property(
-    
-  )
+  @Property({
+    length: 25
+  })
   lastName!: string;
 
-  @Property()
+  @Property({
+    unique: true
+  })
   email!: string;
 
   @Property()
   password!: string;
 
-  @Property()
+  @Property({
+    length: 100
+  })
   address1!: string;
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, length: 100 })
   address2?: string;
 
-  @Property()
+  @Property({
+    length: 50
+  })
   city!: string;
 
-  @Property()
+  @Property({
+    length: 2
+  })
   state!: string;
 
-  @Property()
+  @Property({
+    length: 9
+  })
   zip!: string;
 
-  @Property({ type: 'jsonb' }) // Store as JSON in PostgreSQL
-  skills!: string[];
+  @Property({
+    length: 5
+  })
+  role!: string;
 
   @Property({ nullable: true })
   preferences?: string;
 
-  @Property({ type: 'jsonb' })
-  availability!: string[];
+  @ManyToMany(() => Skill, skill => skill.users, { owner: true })
+  skills = new Collection<Skill>(this);
+
+  @ManyToMany(() => Availability, availability => availability.user, {
+    owner: true
+  })
+  availability: Collection<Availability> = new Collection<Availability>(this);
 
   @Property({ onCreate: () => new Date() })
   createdAt: Date = new Date();
