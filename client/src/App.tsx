@@ -4,12 +4,12 @@ import Home from './Home'
 import RegistrationPage from './pages/RegistrationPage'
 import Navbar from './components/Navbar'
 import ProfilePage from './pages/ProfilePage'
-import VolunteerHistory from './components/user.comp/VolunteerHistoryTable'
+import VolunteerHistory from './pages/admin/VolunteerHistoryPage'
 import EventsPage from './pages/EventsPage'
 import EventManagment from './pages/admin/EventManagment'
 function App () {
   type role = 'admin' | 'guest' | 'user'
-  const userRole: role = 'guest'
+  const userRole: role = 'admin'
   return (
     <BrowserRouter>
       <Routes>
