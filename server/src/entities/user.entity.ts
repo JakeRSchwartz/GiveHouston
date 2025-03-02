@@ -8,7 +8,7 @@ import {
 } from '@mikro-orm/core';
 import { Skill } from './skill.entity';
 import { Availability } from './availability.entity';
-import { AttendingEvents } from './attendedEvents.entity';
+import { AttendingEvents } from './attendingEvents.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()

@@ -7,7 +7,7 @@ import {
   Property
 } from '@mikro-orm/core';
 import { Skill } from './skill.entity';
-import { AttendingEvents } from './attendedEvents.entity';
+import { AttendingEvents } from './attendingEvents.entity';
 import { v4 as uuidv4 } from 'uuid';
 import { Tags } from './tags.entity';
 
@@ -31,11 +31,9 @@ export class Event {
   @Property()
   date!: Date;
 
-  @Property(
-    {
-        length:10
-    }
-  )
+  @Property({
+    length: 10
+  })
   urgency!: string;
 
   @Property({
