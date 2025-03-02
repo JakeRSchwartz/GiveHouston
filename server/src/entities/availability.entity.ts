@@ -2,24 +2,26 @@ import {
   Entity,
   PrimaryKey,
   Property,
-  Unique,
   Collection,
-  ManyToOne,
   ManyToMany
 } from '@mikro-orm/core';
+import { User } from './user.entity';
+import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
 export class Availability {
-  @PrimaryKey()
-  id!: number;
-
-  @Property(
+  @PrimaryKey(
     {
-      type: 'date'
-    }
-  )
+    columnType: 'uuid',
+})
+  id: string = uuidv4();
+
+
+  @Property({
+    type: 'date'
+  })
   date!: Date;
 
-  @ManyToMany(() => Availability, availability => availability.user)
-  user = new Collection<Availability>(this);
+  @ManyToMany(() => User, user => user.availability, {mappedBy: 'availability'})
+  user = new Collection<User>(this);
 }
