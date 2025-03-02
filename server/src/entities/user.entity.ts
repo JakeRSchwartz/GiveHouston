@@ -2,12 +2,13 @@ import {
   Collection,
   Entity,
   ManyToMany,
+  OneToMany,
   PrimaryKey,
-  Property,
-  Unique
+  Property
 } from '@mikro-orm/core';
 import { Skill } from './skill.entity';
 import { Availability } from './availability.entity';
+import { AttendingEvents } from './attendedEvents.entity';
 import { v4 as uuidv4 } from 'uuid';
 
 @Entity()
@@ -73,6 +74,9 @@ export class User {
     owner: true
   })
   availability: Collection<Availability> = new Collection<Availability>(this);
+
+  @OneToMany(() => AttendingEvents, attendedEvents => attendedEvents.user)
+  attendingEvents = new Collection<AttendingEvents>(this);
 
   @Property({ onCreate: () => new Date() })
   createdAt: Date = new Date();
