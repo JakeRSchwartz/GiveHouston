@@ -28,7 +28,11 @@ export class Event {
   })
   description!: string;
 
-  @Property()
+  @Property(
+    {
+      type: 'date'
+    }
+  )
   date!: Date;
 
   @Property({
@@ -40,6 +44,16 @@ export class Event {
     type: 'text'
   })
   location!: string;
+
+  @Property({
+    length: 10
+  })
+  time!: string;
+
+  @Property({
+    type: 'text'
+  })
+  image?: string;
 
   @ManyToMany(() => Skill, skill => skill.events, { owner: true })
   skills = new Collection<Skill>(this);

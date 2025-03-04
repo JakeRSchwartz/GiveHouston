@@ -21,6 +21,4 @@ export class Skill {
 
   @ManyToMany(() => Event, (event) => event.skills, {mappedBy: 'skills'})
   events = new Collection<Event>(this);
-
-
 }

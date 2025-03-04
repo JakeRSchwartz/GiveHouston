@@ -25,7 +25,7 @@ export const login: RequestHandler = async (req, res) => {
       return;
     }
     const token = jwt.sign({ id: user.id }, JWT_SECRET, {
-      expiresIn: '15m'
+      expiresIn: '30m'
     });
     const refreshToken = jwt.sign({ id: user.id }, JWT_REFRESH_SECRET, {
       expiresIn: '7d'
@@ -35,14 +35,14 @@ export const login: RequestHandler = async (req, res) => {
         httpOnly: true,
         sameSite: 'strict',
         secure: __prod__,
-        maxAge: 1000 * 60 * 15 // 15 minutes
+        maxAge: 1000 * 60 * 30 
     });
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
       sameSite: 'strict',
       secure: __prod__,
-      maxAge: 1000 * 60 * 60 * 24 * 7 // 3 hours
+      maxAge: 1000 * 60 * 60 * 24 * 7 
     });
     res.status(200).send('Login successful');
   } catch (err) {
