@@ -76,13 +76,13 @@
         },
         "date": {
           "name": "date",
-          "type": "timestamptz",
+          "type": "date",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": 6,
-          "mappedType": "datetime"
+          "length": 0,
+          "mappedType": "date"
         },
         "urgency": {
           "name": "urgency",
@@ -101,6 +101,25 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "mappedType": "text"
+        },
+        "time": {
+          "name": "time",
+          "type": "varchar(10)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 10,
+          "mappedType": "string"
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
           "mappedType": "text"
         }
       },
