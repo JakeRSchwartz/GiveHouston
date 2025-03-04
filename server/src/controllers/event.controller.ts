@@ -174,15 +174,18 @@ export const updateEvent: RequestHandler = async (req, res) => {
   ) as string[];
   const tags = (Array.isArray(req.body.tags) ? req.body.tags : []) as string[];
 
+  console.log('req.body:', req.body);
+  console.log('skills:', skills);
+  console.log('tags:', tags);
   if (
-    !title &&
-    !description &&
-    !date &&
-    !urgency &&
-    !location &&
-    !time &&
-    !skills.length &&
-    !tags.length
+    !title ||
+    !description ||
+    !date ||
+    !urgency ||
+    !location ||
+    !time ||
+    (skills.length <= 0 || !skills) ||
+    (tags.length <= 0 || !tags)
   ) {
     res.status(400).json({
       message: 'Missing required fields'
