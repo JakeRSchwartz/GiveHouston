@@ -5,8 +5,6 @@ import { Availability } from '../entities/availability.entity';
 import { Collection } from '@mikro-orm/core';
 import { Skill } from '../entities/skill.entity';
 import { DI } from '../middleware/di';
-import { v4 as uuidv4 } from 'uuid';
-
 
 
 export const registerUser: RequestHandler = async (req, res) => {
@@ -22,111 +20,109 @@ export const registerUser: RequestHandler = async (req, res) => {
       city,
       state,
       zip,
-      skills,
-      preferences,
-      availability
+      preferences
     } = req.body;
-    
+    console.log('req.body:', req.body);
+    const availability = req.body.availability
+      ? Array.isArray(req.body.availability)
+        ? req.body.availability
+        : [req.body.availability]
+      : [];
+
+    const skills = req.body.skills
+      ? Array.isArray(req.body.skills)
+        ? req.body.skills
+        : [req.body.skills]
+      : [];
+
     // Default role is 'user'
     const userRole = req.body.role || 'user';
 
-    if (!email || !password || !firstName || !lastName) {
+    if (
+      !email ||
+      !password ||
+      !firstName ||
+      !lastName ||
+      !city ||
+      !state ||
+      !zip ||
+      !address1
+    ) {
       res.status(400).json({ message: 'Missing required fields' });
       return;
     }
 
-    //  Check if the user already exists
     const existingUser = await em.findOne(User, { email });
     if (existingUser) {
       res.status(409).send('User already exists');
       return;
     }
-
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    //  Convert availability strings to Date objects (only keep YYYY-MM-DD)
-    const availabilityDates = availability.map(
-      (date: string) => new Date(date.split('T')[0])
-    );
-
-    //  Fetch existing availability dates from DB
-    const existingAvailabilities = await em.find(Availability, {
-      date: { $in: availabilityDates }
-    });
-
-    //  Extract only the dates (formatted as YYYY-MM-DD) from existing records
-    const existingDateStrings = existingAvailabilities.map(
-      (d: Availability) => d.date.toISOString().split('T')[0]
-    );
-
-    //  Determine which dates need to be created
-    const newDates = availabilityDates.filter(
-      (date: Date) =>
-        !existingDateStrings.includes(date.toISOString().split('T')[0])
-    );
-
-    //  Create new Availability entries for non-existing dates
-    const newAvailabilities = newDates.map((date: Date) =>
-      em.create(Availability, { date: new Date(date) })
-    );
-
-    //  Persist new availability records (if any)
-    if (newAvailabilities.length > 0) {
-      await em.persistAndFlush(newAvailabilities);
-    }
-
-    //  Merge both existing and newly created availability records
-    const allAvailabilities = [...existingAvailabilities, ...newAvailabilities];
-
-    const skillNames = skills || [];
-
-    // Find existing skills by name
-    const existingSkills = await em.find(Skill, { name: { $in: skillNames } });
-
-    // Extract UUIDs of existing skills
-    const existingSkillMap = new Map(
-      existingSkills.map(skill => [skill.name, skill])
-    );
-
-    // Determine which skills are new
-    const newSkillNames = skillNames.filter(
-      (name: string) => !existingSkillMap.has(name)
-    );
-
-    // Create new skills
-    const newSkills = newSkillNames.map((name: string) => {
-      const skill = em.create(Skill, { name, id: uuidv4() });
-      existingSkillMap.set(name, skill);
-      return skill;
-    });
-
-    // Save new skills
-    if (newSkills.length > 0) {
-      await em.persistAndFlush(newSkills);
-    }
-
-    // Merge all skills
-    const allSkills = [...existingSkills, ...newSkills];
-
-    console.log('allAvailabilities:', allAvailabilities);
-    // Create a new user
     const user = em.create(User, {
       firstName: firstName.toLowerCase(),
-      lastName : lastName.toLowerCase(),
-      email : email.toLowerCase(),
+      lastName: lastName.toLowerCase(),
+      email: email.toLowerCase(),
       password: hashedPassword,
       address1,
       address2,
-      city,
+      city: city.toLowerCase(),
       state,
       zip,
       preferences,
       role: userRole,
       createdAt: new Date()
     });
-    user.availability = new Collection<Availability>(user, allAvailabilities);
-    user.skills = new Collection<Skill>(user, allSkills);
+
+
+    //chop of time from date
+    if (availability.length > 0) {
+      const availabilityDates: string[] = availability.map(
+        (date: string) => date.split('T')[0]
+      );
+
+      // See if it already exists
+      const existingAvailabilities = await em.find(Availability, {
+        date: { $in: availabilityDates }
+      });
+
+      //remove time from returned dates to compare next
+      const existingDateSet = new Set(
+        existingAvailabilities.map(
+          avail => avail.date.toISOString().split('T')[0]
+        )
+      );
+
+      //filter out dates that are not in the existing in the database
+      const newAvailabilities = availabilityDates
+        .filter((date: string) => !existingDateSet.has(date))
+        .map((date: string) => em.create(Availability, { date }));
+
+      // Persist new availability records and add to join table (keeps old values in join table, but will add new pair)
+      if (newAvailabilities && newAvailabilities.length > 0) {
+        await em.persistAndFlush(newAvailabilities);
+        user.availability.add(newAvailabilities);
+      }
+    }
+
+    const skillNames = skills || [];
+    if (skillNames.length > 0) {
+      const existingSkills = await em.find(Skill, {
+        name: { $in: skillNames }
+      });
+      // Create a set of existing skill names
+      const existingSkillSet = new Set(existingSkills.map(skill => skill.name));
+
+      // Filter out existing skills
+      const newSkills = skillNames
+        .filter((name: string) => !existingSkillSet.has(name))
+        .map((name: string) => em.create(Skill, { name }));
+
+      // Persist new skills and add to join table (keeps old values in join table, but will add new pair)
+      if (newSkills && newSkills.length > 0) {
+        await em.persistAndFlush(newSkills);
+        user.skills.add(newSkills);
+      }
+    }
 
     await em.persistAndFlush(user);
 

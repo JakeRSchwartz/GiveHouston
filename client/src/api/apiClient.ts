@@ -55,8 +55,8 @@ export default fetchWithRefresh
 //   try {
 //     const data = await fetchWithRefresh('/api/profile', {
 //       method: 'POST',
+//       credentials: 'include',
 //       body: JSON.stringify(newProfileData),
-//       headers: { Authorization: 'Bearer someAccessToken' } // Optional if needed
 //     })
 //     console.log('Profile updated:', data)
 //   } catch (error) {
