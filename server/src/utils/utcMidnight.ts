@@ -5,3 +5,5 @@ export const toUtcMidnight = (date: string | Date) => {
     Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate())
   );
 };
+
+

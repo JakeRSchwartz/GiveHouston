@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey';
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'supersecretrefreshkey';
 
 // Extend Request type to include `user`
 export interface AuthRequest extends Request {
@@ -16,14 +16,15 @@ export const authMiddleware = (
   next: NextFunction
 ): void => {
   const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+  const refreshToken = req.cookies.refreshToken || req.headers.authorization?.split(' ')[1];
 
-  if (!token) {
+  if (!refreshToken) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { id: string };
+    const decoded = jwt.verify((refreshToken), JWT_REFRESH_SECRET) as { id: string };
     req.user = { id: decoded.id }; 
     return next(); 
   } catch (err) {
