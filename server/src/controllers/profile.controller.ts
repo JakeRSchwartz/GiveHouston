@@ -91,7 +91,7 @@ const getOrCreateAvailability = async (
 
   // Filter new availability and ensure only missing dates are created
   const newAvailability = availabilityDates
-    .map(toUtcMidnight) // Normalize all new dates to UTC Midnight
+    .map(toUtcMidnight)
     .filter(date => !existingDates.has(date.toISOString())) // Compare in consistent format
     .map(date => em.create(Availability, { date }));
 

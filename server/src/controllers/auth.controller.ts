@@ -10,10 +10,16 @@ const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkey';
 const JWT_REFRESH_SECRET =
   process.env.JWT_REFRESH_SECRET || 'supersecretrefreshkey';
 
+
+interface LoginRequestBody {
+  email: string;
+  password: string;
+}
+
 export const login: RequestHandler = async (req, res) => {
   try {
     const em = DI.orm.em.fork();
-    const { email, password } = req.body;
+    const { email, password } = req.body as LoginRequestBody;
 
     if (!email || !password) {
       res.status(400).json({ message: 'Missing required fields' });
