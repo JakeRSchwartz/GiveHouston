@@ -23,5 +23,5 @@ export class Availability {
   date!: Date;
 
   @ManyToMany(() => User, user => user.availability, {mappedBy: 'availability'})
-  user = new Collection<User>(this);
+  user = new Collection<User>(this); //check this
 }
