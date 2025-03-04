@@ -21,7 +21,7 @@ export const registerUser: RequestHandler = async (req, res) => {
       state,
       zip,
       preferences
-    } = req.body;
+    } = req.body as User;
     console.log('req.body:', req.body);
     const availability = req.body.availability
       ? Array.isArray(req.body.availability)
@@ -63,12 +63,12 @@ export const registerUser: RequestHandler = async (req, res) => {
       lastName: lastName.toLowerCase(),
       email: email.toLowerCase(),
       password: hashedPassword,
-      address1,
-      address2,
+      address1: address1.toLowerCase(),
+      address2: address2?.toLowerCase(), 
       city: city.toLowerCase(),
-      state,
+      state: state.toUpperCase(),
       zip,
-      preferences,
+      preferences: preferences?.toLowerCase(),
       role: userRole,
       createdAt: new Date()
     });
@@ -100,7 +100,7 @@ export const registerUser: RequestHandler = async (req, res) => {
       // Persist new availability records and add to join table (keeps old values in join table, but will add new pair)
       if (newAvailabilities && newAvailabilities.length > 0) {
         await em.persistAndFlush(newAvailabilities);
-        user.availability.add(newAvailabilities);
+        user.availability.set(newAvailabilities);
       }
     }
 
@@ -120,7 +120,7 @@ export const registerUser: RequestHandler = async (req, res) => {
       // Persist new skills and add to join table (keeps old values in join table, but will add new pair)
       if (newSkills && newSkills.length > 0) {
         await em.persistAndFlush(newSkills);
-        user.skills.add(newSkills);
+        user.skills.set(newSkills);
       }
     }
 

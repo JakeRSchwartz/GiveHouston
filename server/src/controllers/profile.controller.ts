@@ -1,11 +1,29 @@
-import { RequestHandler } from 'express';
+import e, { RequestHandler } from 'express';
 import { DI } from '../middleware/di';
 import { User } from '../entities/user.entity';
 import { Availability } from '../entities/availability.entity';
 import { Skill } from '../entities/skill.entity';
 import { AuthRequest } from '../middleware/authMiddleware';
-import { EntityManager, IDatabaseDriver, Connection } from '@mikro-orm/core';
+import {
+  EntityManager,
+  IDatabaseDriver,
+  Connection,
+} from '@mikro-orm/core';
 import bcrypt from 'bcrypt';
+
+interface UpdateProfileRequestBody {
+  firstName?: string;
+  lastName?: string;
+  address1?: string;
+  address2?: string;
+  password?: string;
+  city?: string;
+  state?: string;
+  zip?: string;
+  skills?: string[];
+  availability?: string[] | Date[]; 
+  preferences?: string; 
+}
 
 export const getProfile: RequestHandler = async (req: AuthRequest, res) => {
   try {
@@ -28,8 +46,6 @@ export const getProfile: RequestHandler = async (req: AuthRequest, res) => {
   }
 };
 
-
-
 const getOrCreateSkills = async (
   em: EntityManager<IDatabaseDriver<Connection>>,
   skillNames: string[]
@@ -45,19 +61,14 @@ const getOrCreateSkills = async (
     .filter(name => !existingSkillNames.has(name))
     .map(name => em.create(Skill, { name }));
 
-  console.log('newSkills:', newSkills);
-  console.log('existingSkills:', existingSkills);
-
   if (newSkills.length > 0) await em.persistAndFlush(newSkills);
 
   return [...existingSkills, ...newSkills];
 };
 
-
-
 const getOrCreateAvailability = async (
   em: EntityManager<IDatabaseDriver<Connection>>,
-  availabilityDates: string[]
+  availabilityDates: (string | Date)[]
 ) => {
   if (!availabilityDates.length) return [];
 
@@ -71,7 +82,7 @@ const getOrCreateAvailability = async (
 
   // Fetch existing availability and normalize to date-only format (UTC Midnight)
   const existingAvailability = await em.find(Availability, {
-    date: { $in: availabilityDates.map(toUtcMidnight) }
+    date: { $in: availabilityDates.map(date => toUtcMidnight(date)) }
   });
 
   const existingDates = new Set(
@@ -80,7 +91,7 @@ const getOrCreateAvailability = async (
 
   // Filter new availability and ensure only missing dates are created
   const newAvailability = availabilityDates
-    .map(toUtcMidnight) // Normalize all new dates to UTC Midnight
+    .map(toUtcMidnight)
     .filter(date => !existingDates.has(date.toISOString())) // Compare in consistent format
     .map(date => em.create(Availability, { date }));
 
@@ -91,10 +102,6 @@ const getOrCreateAvailability = async (
 
   return [...existingAvailability, ...newAvailability];
 };
-
-
-
-
 
 export const updateProfile: RequestHandler = async (req: AuthRequest, res) => {
   try {
@@ -123,25 +130,25 @@ export const updateProfile: RequestHandler = async (req: AuthRequest, res) => {
       state,
       zip,
       skills,
-      preferences,
-      availability
-    } = req.body;
+      availability,
+      preferences
+    } = req.body as UpdateProfileRequestBody;
 
-    if (firstName) user.firstName = firstName;
-    if (lastName) user.lastName = lastName;
-    if (address1) user.address1 = address1;
-    if (address2) user.address2 = address2;
-    if (city) user.city = city;
-    if (state) user.state = state;
+    if (firstName) user.firstName = firstName.toLowerCase();
+    if (lastName) user.lastName = lastName.toLowerCase();
+    if (address1) user.address1 = address1.toLowerCase();
+    if (address2) user.address2 = address2.toLowerCase();
+    if (city) user.city = city.toLowerCase();
+    if (state) user.state = state.toUpperCase();
     if (zip) user.zip = zip;
-    if (preferences) user.preferences = preferences;
+    if (preferences) user.preferences = preferences.toLowerCase();
 
     if (password && !bcrypt.compare(password, user.password)) {
       const hashedPassword = await bcrypt.hash(password, 10);
       user.password = hashedPassword;
     }
 
-    if (!skills) {
+    if (!skills || skills.length === 0) {
       user.skills.removeAll();
     } else {
       const skillsArray = Array.isArray(skills) ? skills : [skills];
@@ -149,7 +156,7 @@ export const updateProfile: RequestHandler = async (req: AuthRequest, res) => {
       user.skills.set(userSkills);
     }
 
-    if (!availability) {
+    if (!availability || availability.length === 0) {
       user.availability.removeAll();
     } else {
       const availabilityArray = Array.isArray(availability)
